@@ -318,46 +318,25 @@ main{}
   .footer-bottom-right{white-space:normal}
 }
 
-/* ===== Mobile horizontal-scroll hard stop (added v2) ===== */
-/* Stop page-level sideways scroll even if a child overflows by a few pixels */
-html, body {
-  width: 100%;
-  overflow-x: hidden !important;
-}
+/* ===== v3: brute-force horizontal overflow prevention (added) ===== */
+/* Make sizing predictable */
+*, *::before, *::after { box-sizing: border-box; }
 
-/* Make all embedded content obey the viewport */
-iframe, embed, object, video {
-  max-width: 100% !important;
-}
+/* Hard stop page-level horizontal overflow (iOS Safari tends to "pan" even on tiny overflows) */
+html, body { max-width: 100%; overflow-x: hidden !important; }
 
-/* Buzzsprout embeds: the injected iframe can exceed the viewport on iOS */
-div[id^="buzzsprout-player-"],
-div[id^="buzzsprout-player-"] * {
-  max-width: 100% !important;
-}
-div[id^="buzzsprout-player-"] iframe {
-  width: 100% !important;
-  max-width: 100% !important;
-}
+/* Ensure common media cannot exceed the viewport */
+img, svg, video, canvas, iframe, embed, object { max-width: 100% !important; height: auto; }
 
-/* Footer: remove intentional horizontal scroller on phones; let buttons wrap */
-@media (max-width: 820px){
-  .footer-buttons{
-    flex-wrap: wrap !important;
-    overflow-x: hidden !important;
-  }
-  .platform-btn{
-    white-space: normal !important;  /* allow wrapping instead of widening */
-  }
-  .footer-bottom-right{
-    white-space: normal !important;
-  }
-  /* Episode rows: avoid grid auto-column forcing overflow */
-  .episode{
-    grid-template-columns: 1fr !important;
-  }
-  .ep-actions{
-    justify-content: flex-start !important;
-    flex-wrap: wrap !important;
-  }
+/* Long strings/URLs shouldn't force horizontal scroll */
+p, li, a, h1, h2, h3, h4, h5, h6 { overflow-wrap: anywhere; word-break: break-word; }
+pre, code { white-space: pre-wrap; word-break: break-word; }
+
+/* If any element uses 100% + padding, keep it from spilling */
+.container, .wrap, .content, main, header, footer, section { max-width: 100%; }
+
+/* Specific: top nav + footer button rows should wrap on small screens */
+@media (max-width: 900px){
+  .nav, .nav-links, .footer-buttons, .footer-links, .footer-badges { flex-wrap: wrap !important; }
+  .nav-links, .footer-buttons { overflow-x: visible !important; }
 }
