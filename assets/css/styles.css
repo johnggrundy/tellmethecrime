@@ -524,3 +524,11 @@ div[id^="buzzsprout-player-"] object {
   .support-actions{flex-direction:column; align-items:stretch}
   .support-btn{justify-content:flex-start}
 }
+
+
+/* Compact latest episode strip */
+.latest-episode-strip{padding:8px 0 26px}
+.latest-episode-strip-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 16px;border:1px solid var(--border);border-radius:16px;background:rgba(231,237,245,.04)}
+.latest-episode-strip-title{margin-top:4px;font-weight:650;line-height:1.35}
+.latest-episode-strip-actions{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:760px){.latest-episode-strip{padding:4px 0 22px}.latest-episode-strip-inner{align-items:flex-start}}
