@@ -1,0 +1,65 @@
+name: Update Episode 30 site
+on:
+  push:
+    paths:
+      - '.github/workflows/update-episode30.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Episode 30 across site
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          title = "The Husband Who Killed His Wife’s Killer - The Mark Winger Case"
+          desc = "<p>When Mark Winger finds his wife being brutally attacked inside their home, he shoots and kills her attacker. Police quickly view him as a grieving husband who tried to save his wife, and the case appears straightforward.</p><p>But one small piece of evidence suggests the supposed killer may have been invited there. Years later, a secret affair and a witness with a disturbing story force investigators to reconsider everything they thought they knew about the crime scene.</p><p>In this episode, John tells Febriana the case of Donnah Winger and Roger Harrington.</p>"
+          player = '<div class="player"><iframe frameborder="0" height="200" loading="lazy" scrolling="no" src="https://www.buzzsprout.com/2599742/episodes/19793458?client_source=small_player&amp;iframe=true&amp;v=20260912" title="'+title+'" width="100%"></iframe></div>'
+
+          # Homepage: replace latest block and newest-release cards.
+          p = Path('index.html')
+          s = p.read_text()
+          start = s.index('<section class="section" id="listen">')
+          end = s.index('</section>', start) + len('</section>')
+          latest = '<section class="section" id="listen"><div class="kicker">Latest episode</div><h2 class="section-title">Episode 30 · '+title+'</h2>'+player+'<div class="hook-card show-notes-card"><div class="episode-hook">'+desc+'</div></div><div class="home-latest-actions"><a class="chip" href="episodes/episode-30.html">Episode page</a><a class="chip" href="episodes.html">All episodes</a><a class="chip" href="about.html">About the show</a></div></section>'
+          s = s[:start] + latest + s[end:]
+          grid_start = s.index('<div class="grid3">')
+          grid_end = s.index('</div>\n</section>', grid_start)
+          ep30 = '<article class="card"><h3>Episode 30 · <a href="episodes/episode-30.html">'+title+'</a></h3><div class="episode-hook">'+desc+'</div></article>'
+          ep29 = '<article class="card"><h3>Episode 29 · <a href="episodes/episode-29.html">The man who traveled the world after he was dead - The murder of Chris Smith</a></h3><div class="episode-hook"><p>Imagine someone you love sells his business, leaves everything behind, and starts traveling the world. Emails keep arriving from South America, India, Africa, and beyond, and everything seems fine.</p><p>Except no one can hear his voice or see a new photo. Months later, his family learns the truth: Chris Smith was never traveling. He had been dead the entire time.</p><p>In this episode, Febriana tells John the case of Chris Smith.</p></div></article>'
+          ep28 = '<article class="card"><h3>Episode 28 · <a href="episodes/episode-28.html">The Dog Attack That Became Murder - The Death of Diane Whipple</a></h3><div class="episode-hook"><p>The story follows Diane Whipple, an elite athlete and college lacrosse coach killed just outside her San Francisco apartment by her neighbors\' dogs. What initially looked like a horrific animal attack soon exposed months of ignored warnings, a bizarre connection to an imprisoned gang member, and a question rarely asked in a courtroom: when does refusing to recognize a danger become murder?</p><p>In this episode, John tells Febriana the case of Diane Whipple.</p></div></article>'
+          s = s[:grid_start] + '<div class="grid3">' + ep30 + ep29 + ep28 + s[grid_end:]
+          p.write_text(s)
+
+          # Episodes page: prepend Episode 30 without altering any existing episodes.
+          p = Path('episodes.html')
+          s = p.read_text()
+          marker = '<div class="episode-list">'
+          ep = '<article class="episode"><div><div class="ep-title">Episode 30 · '+title+'</div><div class="ep-meta">Released: 2026-09-12</div>'+player+'<div class="episode-hook">'+desc+'</div></div><div class="ep-actions"><a class="chip" href="episodes/episode-30.html">Episode page</a></div></article>'
+          s = s.replace(marker, marker + ep, 1)
+          p.write_text(s)
+
+          # Update hard-coded latest-episode strips on all existing episode pages.
+          import re
+          for f in Path('episodes').glob('episode-*.html'):
+              if f.name == 'episode-30.html':
+                  continue
+              s = f.read_text()
+              pattern = r'<section aria-label="Latest episode" class="latest-episode-strip">.*?</section>'
+              replacement = '<section aria-label="Latest episode" class="latest-episode-strip"><div class="latest-episode-strip-inner"><div><div class="kicker">Latest episode</div><div class="latest-episode-strip-title">Episode 30 · '+title+'</div></div><div class="latest-episode-strip-actions"><a class="chip" href="../episodes/episode-30.html">Listen now</a><a class="chip" href="../episodes.html">All episodes</a></div></div></section>'
+              ns, n = re.subn(pattern, replacement, s, count=1, flags=re.S)
+              if n:
+                  f.write_text(ns)
+          PY
+      - name: Commit generated updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html episodes.html episodes/
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish Episode 30 across Tell Me The Crime"
+            git push
+          fi
