@@ -4,14 +4,14 @@
 STAGED. Do not merge the draft pull request or deploy until the episode audio is uploaded, the Buzzsprout episode is published, and its final link is provided. The current live website must continue to show Episode 35.
 
 ## Buzzsprout episode title
-Episode 36: The Serial Killer Who Investigated His Own Murders - The Mikhail Popkov Case
+Episode 36: The Women Who Never Came Home - The Angarsk Murders
 
 ## Description
-Two young women disappear after a night out in Siberia. Their bodies are found the next day, and they are far from the first.
+Two friends leave a concert in Siberia. Neither returns home. When their bodies are found, investigators have very little to explain what happened.
 
-As investigators search for a killer who always seems one step ahead, a survivor describes an encounter that should have changed everything. But the murders continue for years.
+Then more women are discovered in isolated places around Angarsk. The cases don't look identical, but a few details are hard to ignore. Why does the person responsible seem so difficult to find?
 
-In this episode, John tells Febriana the story of Mikhail Popkov, whose double life concealed one of the most disturbing serial murder cases in Russian history.
+In this episode, John tells Febriana the story of the Angarsk murders, a mystery that would take years to unravel.
 
 Listener discretion is advised. This episode discusses murder, sexual violence, and graphic violence.
 
