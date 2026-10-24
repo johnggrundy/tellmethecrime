@@ -7,13 +7,13 @@ STAGED. Do not merge the draft pull request or deploy until the episode audio is
 Episode 36: The Women Who Never Came Home - The Angarsk Murders
 
 ## Description
-Two friends leave a concert in Siberia. Neither returns home. When their bodies are found, investigators have very little to explain what happened.
+Two friends leave a concert. Neither comes home.
 
-Then more women are discovered in isolated places around Angarsk. The cases don't look identical, but a few details are hard to ignore. Why does the person responsible seem so difficult to find?
+Their bodies are found outside a Siberian city where women have been disappearing for years. Then another woman survives an attack and gives police a crucial lead. So why does the killing continue?
 
-In this episode, John tells Febriana the story of the Angarsk murders, a mystery that would take years to unravel.
+John tells Febriana the story of the Angarsk murders.
 
-Listener discretion is advised. This episode discusses murder, sexual violence, and graphic violence.
+Content warning: sexual assault and graphic violence.
 
 ## Credits
 John tells Febriana.
