@@ -4,7 +4,7 @@
 RELEASED 2026-10-24: Buzzsprout episode ID 20013135. Website publishing prepared via GitHub pull request 1.
 
 ## Buzzsprout episode title
-Episode 36: The Women Who Never Came Home - The Angarsk Murders
+Episode 36: The Women Who Never Came Home - The Angarsk Serial Killer
 
 ## Description
 Two friends leave a concert. Neither comes home.
