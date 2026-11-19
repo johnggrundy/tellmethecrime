@@ -532,3 +532,17 @@ div[id^="buzzsprout-player-"] object {
 .latest-episode-strip-title{margin-top:4px;font-weight:650;line-height:1.35}
 .latest-episode-strip-actions{display:flex;gap:10px;flex-wrap:wrap}
 @media (max-width:760px){.latest-episode-strip{padding:4px 0 22px}.latest-episode-strip-inner{align-items:flex-start}}
+
+
+/* RankThisSite's live ranking badge in the site-wide footer */
+.rankthissite-footer-badge {
+  width: min(320px, 100%);
+  margin-top: 12px;
+  margin-left: auto;
+  line-height: 0;
+}
+.rankthissite-footer-badge a { display: block; }
+.rankthissite-footer-badge img { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) {
+  .rankthissite-footer-badge { margin-left: 0; }
+}
