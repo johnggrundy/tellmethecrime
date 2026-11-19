@@ -248,17 +248,17 @@ main{}
 }
 .footer-wrap{display:flex; flex-direction:column; gap:14px;}
 .footer-top{
-  display:flex;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,252px) max-content;
   align-items:center;
-  justify-content:space-between;
   gap:14px;
 }
 .footer-buttons{
   display:flex;
-  flex-wrap:nowrap;          /* single row */
+  flex-wrap:wrap;          /* avoid sideways footer scrolling */
   gap:10px;
   align-items:center;
-  overflow-x:auto;           /* if narrow screens, scroll instead of wrapping */
+  overflow-x:visible;
   -webkit-overflow-scrolling: touch;
   padding-bottom:2px;
 }
@@ -294,7 +294,7 @@ main{}
 .platform-btn[data-platform="youtube"] .platform-ico{color:#FF0000}
 .platform-btn[data-platform="apple"] .platform-ico{color:#ffffff}
 
-.footer-producer{display:flex; flex-direction:column; align-items:flex-end; gap:6px; color:var(--muted)}
+.footer-producer{display:flex; flex-direction:column; align-items:flex-end; gap:6px; color:var(--muted); justify-self:end}
 .producer-label{font-size:12px; letter-spacing:.02em}
 .producer-logo{height:72px; width:auto; opacity:.96}
 
@@ -312,8 +312,6 @@ main{}
 .footer-bottom-right a:hover{color:var(--text)}
 
 @media (max-width: 760px){
-  .footer-top{flex-direction:column; align-items:flex-start}
-  .footer-producer{align-items:flex-start}
   .footer-bottom{flex-direction:column; align-items:flex-start}
   .footer-bottom-right{white-space:normal}
 }
@@ -534,15 +532,24 @@ div[id^="buzzsprout-player-"] object {
 @media (max-width:760px){.latest-episode-strip{padding:4px 0 22px}.latest-episode-strip-inner{align-items:flex-start}}
 
 
-/* RankThisSite's live ranking badge in the site-wide footer */
+/* Footer: ranking stays separate from Privacy and RSS. */
 .rankthissite-footer-badge {
-  width: min(320px, 100%);
-  margin-top: 12px;
-  margin-left: auto;
-  line-height: 0;
+  width: min(252px, 100%);
+  margin: 0;
+  justify-self:end;
+  line-height:0;
 }
-.rankthissite-footer-badge a { display: block; }
-.rankthissite-footer-badge img { display: block; width: 100%; height: auto; }
-@media (max-width: 760px) {
-  .rankthissite-footer-badge { margin-left: 0; }
+.rankthissite-footer-badge a { display:block; }
+.rankthissite-footer-badge img { display:block; width:100%; height:auto; }
+
+@media (max-width:1100px) {
+  .footer-top { grid-template-columns:minmax(0,1fr) max-content; }
+  .footer-buttons { grid-column:1 / -1; }
+  .rankthissite-footer-badge { grid-column:1; grid-row:2; justify-self:start; }
+  .footer-producer { grid-column:2; grid-row:2; }
+}
+@media (max-width:440px) {
+  .footer-top { grid-template-columns:minmax(0,1fr); }
+  .rankthissite-footer-badge { grid-column:1; grid-row:2; }
+  .footer-producer { grid-column:1; grid-row:3; justify-self:start; align-items:flex-start; }
 }
